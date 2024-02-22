@@ -1,0 +1,16 @@
+pandas
+mlflow
+notebook
+numpy
+scikit-learn
+matplotlib
+seaborn
+python-box==6.0.2
+pyYAML
+tqdm
+ensure==1.0.2
+joblib
+types-pyYAML
+Flask
+Flask-Cors
+-e .  # it do look for the setup.py local package

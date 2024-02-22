@@ -1,0 +1,18 @@
+# # this is called Schema.yaml file which it contains how many columns and it w.r.t data_types and the column names are present inside our dataset 
+COLUMNS:
+COLUMNS:
+  Age: int64
+  Sex: object
+  ChestPainType: object
+  RestingBP: int64
+  Cholesterol: int64
+  FastingBS: int64
+  RestingECG: object
+  MaxHR: int64
+  ExerciseAngina: object
+  Oldpeak: float64
+  ST_Slope: object
+  HeartDisease: int64
+
+TARGET_COLUMN:
+  name: HeartDisease

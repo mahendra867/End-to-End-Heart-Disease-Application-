@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Prediction Result</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-size: 18px; /* Increase body font size for better readability */
+        }
+        .container {
+            margin-top: 50px;
+            max-width: 800px; /* Increase max-width for better readability */
+        }
+        .result-container {
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+            background-color: #d4edda;
+            border-radius: 5px;
+        }
+        .lead {
+            font-size: 20px; /* Increase lead font size */
+        }
+        .btn-primary {
+            font-size: 20px; /* Increase button font size */
+            margin-top: 15px; /* Add margin to button for better spacing */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Prediction Result</h1>
+        <div class="result-container">
+            <p class="lead">The predicted heart disease status is: <strong>{{ prediction }}</strong></p>
+            <a href="/" class="btn btn-primary">Go back</a>
+        </div>
+    </div>
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
