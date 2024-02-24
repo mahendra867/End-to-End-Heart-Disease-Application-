@@ -22,6 +22,8 @@ class FeatureSelection:
 # here i have defined the tarin_test_split below for performing the train_test_split
     def train_test_spliting(self):
 
+        
+
         self.train_csv_features.to_csv(os.path.join(self.config.root_dir, "Modified_train.csv"),index = False) # here it saves the train and test data in csv format inisde the artifacts-> transformation folder
         self.test_csv_features.to_csv(os.path.join(self.config.root_dir, "Modified_test.csv"),index = False)
 

@@ -27,12 +27,22 @@ class ModelTrainer:
         train_data = pd.read_csv(self.config.train_data_path) # here it is taking the paths of train and test dataset
         test_data = pd.read_csv(self.config.test_data_path)
 
+        print(train_data.head())
+        print(test_data.head())
+
+        print(train_data.shape)
+        print(test_data.shape)
 
         self.train_x = train_data.drop([self.config.target_column], axis=1)  # here iam dropping my target column in train_x
         self.test_x = test_data.drop([self.config.target_column], axis=1)  # here iam dropping my target column in test_X
         self.train_y = train_data[self.config.target_column]  # here iam keeping the target column in train_y
         self.test_y = test_data[self.config.target_column] # here iam keeping the target column in test_y
 
+        print(self.train_x.shape)
+        print(self.test_x.shape)
+        print(self.train_y.shape)
+        print(self.test_y.shape)
+    
 
     def model(self):
 

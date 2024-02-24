@@ -21,9 +21,16 @@ class ModelEvaluation:
 
     def model_evaluation(self):
         test_data=pd.read_csv(self.config.test_data_path)
+        print(test_data.head())
+        print(test_data.shape)
         model=joblib.load(self.config.model_path)
+        
         test_x = test_data.drop([self.config.target_column], axis=1) # here iam dropping my targetcolumn in test_x
         test_y = test_data[[self.config.target_column]] # here iam keeping my target column
+
+        print(test_x.shape)
+        print(test_y.shape)
+        
         # Confusion Matrix
         cm = confusion_matrix(test_y,model.predict(test_x))
         names = ['True Neg','False Pos','False Neg','True Pos']
