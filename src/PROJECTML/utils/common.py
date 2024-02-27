@@ -8,6 +8,7 @@ from ensure import ensure_annotations
 from box import ConfigBox
 from pathlib import Path
 from typing import Any
+import pickle
 
 
 # this is simple python code with function concept for how to rad the yaml files 
@@ -96,21 +97,40 @@ def save_bin(data: Any, path: Path):
     logger.info(f"binary file saved at: {path}")
 
 
-@ensure_annotations
+"""@ensure_annotations
 def load_bin(path: Path) -> Any:
-    """load binary data
+    load binary data
 
     Args:
         path (Path): path to binary file
 
     Returns:
         Any: object stored in the file
-    """
+    
     data = joblib.load(path)
     logger.info(f"binary file loaded from: {path}")
     return data
+"""
 
-@ensure_annotations
+
+
+
+def load_bin(path: Path) -> Any:
+    """Load binary data.
+
+    Args:
+        path (Path): Path to binary file.
+
+    Returns:
+        Any: Object stored in the file.
+    """
+    with open(path, "rb") as file:
+        data = joblib.load(file)
+    logger.info(f"Binary file loaded from: {path}")
+    return data
+
+
+
 def load_object(file_path):
     try:
         with open(file_path, "rb") as file_obj:
@@ -119,7 +139,17 @@ def load_object(file_path):
     except Exception as e:
         logger.error(f"Error loading object from {file_path}: {e}")
         raise e
-        
+    
+
+
+def load_object1(file_path):
+    try:
+        with open(file_path, "rb") as file_obj:
+            return pickle.load(file_obj)
+
+    except Exception as e:
+        raise e
+  
 
 
 @ensure_annotations

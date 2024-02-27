@@ -6,7 +6,8 @@ from PROJECTML import logger # here logger is used to logger the data
 from PROJECTML.utils.common import get_size # here i used the getsize is used to get to know the file size
 from pathlib import Path
 from PROJECTML.entity.config_entity import DataIngestionConfig 
-
+from sklearn.model_selection import train_test_split
+import pandas as pd
 
 # Now iam going to define one class which is DataIngestion from that class which it will take the DataIngestionConfig because from this dataingestionConfig only it will get to know the path 
 class DataIngestion:
@@ -24,6 +25,7 @@ class DataIngestion:
         else:
             logger.info(f"File already exists of size: {get_size(Path(self.config.local_data_file))}") # if the data file is already exist it will print the message like that data file is already exit
 
+    
 
 # now iam going to another method called ExtractZipfile
     def extract_zip_file(self):
@@ -36,3 +38,13 @@ class DataIngestion:
         os.makedirs(unzip_path, exist_ok=True)
         with zipfile.ZipFile(self.config.local_data_file, 'r') as zip_ref: # here it will take the local_data_file path which is present in the config.yaml  local_data_file: artifacts/data_ingestion/data.zip and it will unzip the folder to this data_ingestion 
             zip_ref.extractall(unzip_path)
+
+
+    def train_test_spliting(self):
+
+        data=pd.read_csv("artifacts\data_ingestion\Heart_csv\heart.csv")
+        # Split the data into training and test sets. (0.75, 0.25) split.
+        train, test = train_test_split(data, test_size=0.20,random_state=2)
+
+        train.to_csv(os.path.join(self.config.root_dir, "train.csv"), index=False)
+        test.to_csv(os.path.join(self.config.root_dir, "test.csv"), index=False)

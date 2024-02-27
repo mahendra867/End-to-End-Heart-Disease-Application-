@@ -9,8 +9,10 @@ from sklearn.metrics import confusion_matrix
 from sklearn.metrics import classification_report
 from sklearn.metrics import precision_recall_curve
 import seaborn as sns
-import joblib
 from PROJECTML.entity.config_entity import ModelEvaluationConfig
+from src.PROJECTML.utils.common import load_object1
+
+
 
 
 # here i have defined one ModelEvaluation class in which i have defined the ModelEvaluationConfig
@@ -21,16 +23,9 @@ class ModelEvaluation:
 
     def model_evaluation(self):
         test_data=pd.read_csv(self.config.test_data_path)
-        print(test_data.head())
-        print(test_data.shape)
-        model=joblib.load(self.config.model_path)
-        
+        model=load_object1(self.config.model_path)
         test_x = test_data.drop([self.config.target_column], axis=1) # here iam dropping my targetcolumn in test_x
         test_y = test_data[[self.config.target_column]] # here iam keeping my target column
-
-        print(test_x.shape)
-        print(test_y.shape)
-        
         # Confusion Matrix
         cm = confusion_matrix(test_y,model.predict(test_x))
         names = ['True Neg','False Pos','False Neg','True Pos']

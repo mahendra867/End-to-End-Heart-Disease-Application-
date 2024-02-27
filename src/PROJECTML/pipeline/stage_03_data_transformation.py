@@ -19,12 +19,10 @@ class DataTransformationTrainingPipeline:
                 status = f.read().split(" ")[-1]
 
             if status == "True":  # here if the status.txt file status found true then iam running the data_transformation pipeline
-                config = ConfigurationManager() # here iam initlizing my ConfigurationManager
-                data_transformation_config = config.get_data_transformation_config() # and here iam getting my get_data_transformation_config()
-                data_transformation = DataTransformation(config=data_transformation_config) # here iam passing my data_transformation_config it means iam calling this data_transformation_config
-                data_transformation.label_encoding()
-                scalled_data=data_transformation.data_scaling()
-                data_transformation.train_test_spliting(scalled_data) # here performing the train_test_split()
+                config = ConfigurationManager()
+                data_transformation_config = config.get_data_transformation_config()
+                data_transformation = DataTransformation(config=data_transformation_config)
+                pipeline_object=data_transformation.pipeline_creation()
             else: # else if i status.txt file status shows as false iam rasing the exception
                 raise Exception("You data schema is not valid")
 

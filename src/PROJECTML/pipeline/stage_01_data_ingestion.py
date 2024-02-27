@@ -18,6 +18,7 @@ class DataIngestionTrainingPipeline:
         data_ingestion = DataIngestion(config=data_ingestion_config)
         data_ingestion.download_file()
         data_ingestion.extract_zip_file()
+        data_ingestion.train_test_spliting()
 
 
 # now i need to call the above methode inside the below main methode basically it is telling that 

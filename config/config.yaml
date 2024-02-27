@@ -6,7 +6,7 @@ data_ingestion: # here iam defining the data_ingestion related configuration
   source_URL: https://github.com/mahendra867/random_datasets/raw/main/Heart_csv.zip  # this is my data downloaded URL  by this if we past the URL in the google kaggle winequality dataset get downloaded
   local_data_file: artifacts/data_ingestion/data.zip # when the above data which is present in the line get downloaded it do save inside the local_data_file with name of data.zip
   unzip_dir: artifacts/data_ingestion # again iam unzipping the data file and sending it into data_ingestion
-
+  
 
 data_validation:  # here iam defining the data_ingestion related configuration
   root_dir: artifacts/data_validation  # # here iam creating one data_ingestion folder inside the artifacts
@@ -20,23 +20,24 @@ data_transformation:
   data_path: artifacts\data_ingestion\Heart_csv\heart.csv  # and this is the path of the dataset , because whenever iam reading the dataset inside the data_transformation i will need this path at that time
 
 
+
 feature_selection:
   root_dir: artifacts/feature_selection
-  train_data_path: artifacts\data_transformation\train.csv  # our model is taking the train and test path which are present inside the data_transformation
-  test_data_path: artifacts\data_transformation\test.csv
+  train_data_path: artifacts\data_transformation\Transformed_train.csv  # our model is taking the train and test path which are present inside the data_transformation
+  test_data_path: artifacts\data_transformation\Transformed_test.csv
 
 # here iam prepraing my model trainer configuration 
 model_trainer:
   root_dir: artifacts/model_trainer  # here actually iam creating folder inside the model_trainer folder 
   train_data_path: artifacts\feature_selection\Modified_train.csv  # our model is taking the train and test path which are present inside the data_transformation
   test_data_path: artifacts\feature_selection\Modified_test.csv
-  model_name: model.joblib  # once the model got trained by the above train path our model will get saved inside the artifacts->model_trainer folder and we are saving our model in the formate of joblib rather than pickel formate because joblib is better than pickle formate
+  model_name: model.pkl  # once the model got trained by the above train path our model will get saved inside the artifacts->model_trainer folder and we are saving our model in the formate of joblib rather than pickel formate because joblib is better than pickle formate
 
 
 # so this is my model_evaluation related configuration and creating 1 folder which is related to model_evaluation
 model_evaluation:
   root_dir: artifacts/model_evaluation
   test_data_path: artifacts\feature_selection\Modified_test.csv # here actually iam taking the test dataset which is available inside the data_transformation, actually i want to test my data by using the trained model
-  model_path: artifacts/model_trainer/model.joblib  # the trained model got inside this path
+  model_path: artifacts/model_trainer/model.pkl # the trained model got inside this path
   metric_file_name: artifacts/model_evaluation/metrics.json # and our model_evalution create one metrics.json file inside the provided path
 
