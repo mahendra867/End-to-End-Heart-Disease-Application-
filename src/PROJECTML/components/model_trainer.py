@@ -60,6 +60,7 @@ class ModelTrainer:
 
         #pickle.dump(pipe,os.path.join(self.config.root_dir,self.config.model_name),open('model.pkl','wb')) # here are training my model iam just saving inside the folder Model_trainer which it will get create inside the artifacts
 
+        joblib.dump(pipe, os.path.join(self.config.root_dir, self.config.model_name))
 
-        with open(os.path.join(self.config.root_dir, self.config.model_name), 'wb') as model_pkl_file:
-            pickle.dump(pipe, model_pkl_file)
+        #with open(os.path.join(self.config.root_dir, self.config.model_name), 'wb') as model_pkl_file:
+         #   pickle.dump(pipe, model_pkl_file)

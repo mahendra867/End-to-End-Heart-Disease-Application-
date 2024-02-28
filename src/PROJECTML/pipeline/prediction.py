@@ -3,8 +3,8 @@ import numpy as np
 import pandas as pd
 from pathlib import Path
 from PROJECTML import logger
-from PROJECTML.utils.common import load_object
-from sklearn.preprocessing import MinMaxScaler, StandardScaler, LabelEncoder
+from PROJECTML.utils.common import load_bin
+
 
 
 class CustomData:
@@ -58,7 +58,7 @@ class CustomData:
 
 class PredictionPipeline:
         def __init__(self):
-            self.model = load_object("artifacts\model_trainer\model.pkl")
+            self.model = load_bin("artifacts/model_trainer/model.pkl")
             print(self.model)
             logger.info("Model+preprocessing objects loaded successfully")
     

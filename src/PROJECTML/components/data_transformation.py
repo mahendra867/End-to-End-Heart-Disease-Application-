@@ -17,13 +17,6 @@ from PROJECTML.utils.common import load_object
 
 
 
-class DataTransformation:
-    def __init__(self, config: DataTransformationConfig):
-        self.config = config
-        self.mms = MinMaxScaler() # Move the MinMaxScaler initialization here
-        self.ss = StandardScaler() # Move the StandardScaler initialization here
-
-
 
 class DataTransformation:
     def __init__(self, config: DataTransformationConfig):

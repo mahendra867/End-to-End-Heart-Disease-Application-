@@ -10,7 +10,7 @@ from sklearn.metrics import classification_report
 from sklearn.metrics import precision_recall_curve
 import seaborn as sns
 from PROJECTML.entity.config_entity import ModelEvaluationConfig
-from src.PROJECTML.utils.common import load_object1
+from src.PROJECTML.utils.common import load_bin
 
 
 
@@ -23,7 +23,7 @@ class ModelEvaluation:
 
     def model_evaluation(self):
         test_data=pd.read_csv(self.config.test_data_path)
-        model=load_object1(self.config.model_path)
+        model=load_bin(self.config.model_path)
         test_x = test_data.drop([self.config.target_column], axis=1) # here iam dropping my targetcolumn in test_x
         test_y = test_data[[self.config.target_column]] # here iam keeping my target column
         # Confusion Matrix

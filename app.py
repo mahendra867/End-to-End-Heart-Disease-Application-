@@ -3,6 +3,8 @@ import os
 import numpy as np
 import pandas as pd
 from PROJECTML.pipeline.prediction import PredictionPipeline,CustomData # here iam importing the predicition pipeline which it do predicts on the uploaded data by user and it return the prediction value
+from PROJECTML import logger
+
 
 app = Flask(__name__)
 
@@ -33,14 +35,14 @@ def predict_datapoint():
 
         dataframe=data.get_data_as_dataframe()  # here iam calling the get_data_as_dataframe() method with  data which is obejct for the class customdata and we are storing the gathered data of individual feature which is in the form of dataframe  gets stored  in final_data variable 
 
-
+        logger.info('initiated prediction')
         predict_pipeline=PredictionPipeline() # now here i have created object for the predictionpipeline class to assign the gathered data in the form of dataframe to the best model which i have defined inisde this PredictPipeline() class 
         data = np.array(dataframe).reshape(1, 9)
         prediction=predict_pipeline.predict(data)
         # result=round(pred[0],2)  # here in the result variable we have prediction value with array datatype so iam taking the intial value by just rounding off to 2 points
-
+        logger.info('made prediction and returning to results.html')
         return render_template("results.html",final_result=str(prediction)) # now iam going to create another html file which is result.html to that iam passing this result which consist of prediction value 
-
+logger.info('done with prediction')
 
 if __name__ == "__main__":
 	app.run(host="0.0.0.0", port=8081)
