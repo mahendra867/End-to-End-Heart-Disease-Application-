@@ -1,0 +1,102 @@
+name: workflow # 1st iam running my main workflow 
+
+on:
+  push:
+    branches:
+      - main # As of now iam working with my project in github main branch so thatsy i mention as mian branch here so we can mention different branch names if we work on different branches if something change in my main branch then it will start 
+    paths-ignore:  # here we can mention the files which needs to ingore while performing the CI-CD because readme file is neither not useful to check the for continous-integration and continous deployment because we just need to very our code in CI and we deploy that updated code in AWS 
+      - 'README.md'
+
+permissions:  # here iam giving the perimission read and write lets say if we made some change in code that update should reflect in our code that happen when we give write acces and lets say when we want to read something in our code we need to have access of read thats y i mention read access 
+  id-token: write
+  contents: read
+
+jobs:   # here is the main part which is job under this job we write the workflow of how the contnious integration should perform to our application source code 
+  integration:
+    name: Continuous Integration # here whenever we perform the continous integeration i select one OS so i selected ubuntu latest and iam just running some of the command like echo
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Lint code
+        run: echo "Linting repository"  # here i mention the echo command to run by that ubantu os 
+
+      - name: Run unit tests  # here we are running the echo command to display information so we can get to know which specific part of running by CI , so if we mention the unit test cases inside our project we need to mention inside this CI so after this echo displays the information that unit test cases are started running after that all my unit test cases which i will mention inside the pytest unit test file those all test cases gets executed if we mention that unit test case command inside this CI 
+        run: echo "Running unit tests"
+
+  build-and-push-ecr-image:
+    name: Continuous Delivery # and inside the continous delivery iam logging my AWS credintial 
+    needs: integration
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Install Utilities
+        run: |  # here iam updating my AWS account  by running the below commands
+          sudo apt-get update
+          sudo apt-get install -y jq unzip
+      - name: Configure AWS credentials   # here iam authenticating the AWS account by mentioning the access-key-id and secrete-access-key
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Login to Amazon ECR # then iam loggigng with ECR credientials and service iam using here are ECR which is elastic Container study  
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build, tag, and push image to Amazon ECR  # here iam building my docker image  and then i push my docker image to this ECR and then ECR will store my docker image and 
+        id: build-image 
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY_NAME }}
+          IMAGE_TAG: latest
+        run: |
+          # Build a docker container and
+          # push it to ECR so that it can
+          # be deployed to ECS.               # below commands # here by this command iam building the docker image of my application,   # here  after done with bulding the docker image of my application here by this command iam pushing the  docker image to ECR repository and gets stored inside the repository
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .  
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG    
+          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+          
+          
+  Continuous-Deployment:  # and then i start with continous deployment , so inside the continous deployment it 
+    needs: build-and-push-ecr-image
+    runs-on: self-hosted   # here by this line connection get happens between github and AWS EC2 instance 
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials # here github once again it will authenticate the AWS credentials  
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr # then it will access my ecr machine   by logging into ECR machine
+        uses: aws-actions/amazon-ecr-login@v1
+      
+      
+      - name: Pull latest images # and in that ec2 machine it will push the that docker image from ECR to EC2 machine
+        run: |
+         docker pull ${{secrets.AWS_ECR_LOGIN_URI}}/${{ secrets.ECR_REPOSITORY_NAME }}:latest 
+         
+      # - name: Stop and remove container if running
+      #   run: |
+      #    docker ps -q --filter "name=mlproj" | grep -q . && docker stop mlproj && docker rm -fv mlproj
+       
+      - name: Run Docker Image to serve users # and finally it will get execute  
+        run: |  # as you can see i wrote docker run then finally my application gets run inside the ec2 mahcine and the  all users can have the access of my heart disease application
+         docker run -d -p 8080:8080 --name=mlproj -e 'AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}' -e 'AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}' -e 'AWS_REGION=${{ secrets.AWS_REGION }}'  ${{secrets.AWS_ECR_LOGIN_URI}}/${{ secrets.ECR_REPOSITORY_NAME }}:latest
+      - name: Clean previous images and containers
+        run: |   
+         docker system prune -f
+
+
+
+         
