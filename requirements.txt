@@ -1,4 +1,6 @@
 pandas
+mlflow
+notebook
 numpy
 scikit-learn
 matplotlib
@@ -11,4 +13,4 @@ joblib
 types-pyYAML
 Flask
 Flask-Cors
-#-e .  # it do look for the setup.py local package
+-e .  # it do look for the setup.py local package
