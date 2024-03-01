@@ -84,19 +84,5 @@ jobs:   # here is the main part which is job under this job we write the workflo
       
       - name: Pull latest images # and in that ec2 machine it will push the that docker image from ECR to EC2 machine
         run: |
-         docker pull ${{secrets.AWS_ECR_LOGIN_URI}}/${{ secrets.ECR_REPOSITORY_NAME }}:latest 
-         
-      # - name: Stop and remove container if running
-      #   run: |
-      #    docker ps -q --filter "name=mlproj" | grep -q . && docker stop mlproj && docker rm -fv mlproj
-       
-      - name: Run Docker Image to serve users # and finally it will get execute  
-        run: |  # as you can see i wrote docker run then finally my application gets run inside the ec2 mahcine and the  all users can have the access of my heart disease application
-         docker run -d -p 8080:8081 --name=heartdisease_application_image_repository -e 'AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}' -e 'AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}' -e 'AWS_REGION=${{ secrets.AWS_REGION }}'  ${{secrets.AWS_ECR_LOGIN_URI}}/${{ secrets.ECR_REPOSITORY_NAME }}:latest
-      - name: Clean previous images and containers
-        run: |   
-         docker system prune -f
-
-
-
-         
+          echo "ECR Repository Name: ${{ secrets.ECR_REPOSITORY_NAME }}"
+          docker
