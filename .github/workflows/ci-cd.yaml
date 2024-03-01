@@ -7,7 +7,7 @@ on:
     paths-ignore:  # here we can mention the files which needs to ingore while performing the CI-CD because readme file is neither not useful to check the for continous-integration and continous deployment because we just need to very our code in CI and we deploy that updated code in AWS 
       - 'README.md'
 
-permissions:  # here iam giving the perimission read and write lets say if we made some change in code that update should reflect in our code that happen when we give write acces and lets say when we want to read something in our code we need to have access of read thats y i mention read access 
+permissions:  # here  iam giving the perimission read and write lets say if we made some change in code that update should reflect in our code that happen when we give write acces and lets say when we want to read something in our code we need to have access of read thats y i mention read access 
   id-token: write
   contents: read
 
@@ -92,7 +92,7 @@ jobs:   # here is the main part which is job under this job we write the workflo
        
       - name: Run Docker Image to serve users # and finally it will get execute  
         run: |  # as you can see i wrote docker run then finally my application gets run inside the ec2 mahcine and the  all users can have the access of my heart disease application
-         docker run -d -p 5001:9095 --name=heartapp2 -e 'AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}' -e 'AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}' -e 'AWS_REGION=${{ secrets.AWS_REGION }}'  ${{secrets.AWS_ECR_LOGIN_URI}}/${{ secrets.ECR_REPOSITORY_NAME }}:latest
+         docker run -d -p 5001:9095 --name=heartapp3 -e 'AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}' -e 'AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}' -e 'AWS_REGION=${{ secrets.AWS_REGION }}'  ${{secrets.AWS_ECR_LOGIN_URI}}/${{ secrets.ECR_REPOSITORY_NAME }}:latest
       - name: Clean previous images and containers
         run: |   
          docker system prune -f
