@@ -8,6 +8,6 @@ WORKDIR /app
 
 RUN pip install -r requirements.txt
 
-EXPOSE 8081
+EXPOSE 9095
 
 CMD ["python","app.py"]
