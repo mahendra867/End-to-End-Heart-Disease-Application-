@@ -58,7 +58,7 @@ class CustomData:
 
 class PredictionPipeline:
         def __init__(self):
-            self.model = load_bin("artifacts\model_trainer\model.pkl")
+            self.model = load_bin("artifacts/model_trainer/model.pkl")
             print(self.model)
             logger.info("Model+preprocessing objects loaded successfully")
     
