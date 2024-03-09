@@ -28,6 +28,7 @@ class DataTransformation:
     
         train=pd.read_csv("artifacts\\data_ingestion\\train.csv")
         test=pd.read_csv("artifacts\\data_ingestion\\test.csv")
+        
 
         x_train=train.drop(columns=['HeartDisease'])
         y_train=train['HeartDisease']
