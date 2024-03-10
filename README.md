@@ -3,10 +3,11 @@
 ## Problem Statement :
 With a plethora of medical data available and the rise of Data Science, a host of startups are taking up the challenge of attempting to create indicators for the forseen diseases that might be contracted! Cardiovascular diseases (CVDs) are the number 1 cause of death globally, taking an estimated 17.9 million lives each year, which accounts for 31% of all deaths worldwide. Heart failure is a common event caused by CVDs. People with cardiovascular disease or who are at high cardiovascular risk (due to the presence of one or more risk factors such as hypertension, diabetes, hyperlipidaemia or already established disease) need early detection and management wherein a machine learning model can be of great help. In this way, we try to solve automate another problem that occurs in the nature with a view to counter it and focus on to the next problem with the help of AI techniques!
 
-Aim :
+## Aim :
 To classify / predict whether a patient is prone to heart failure depending on multiple attributes.
 It is a binary classification with multiple numerical and categorical features.
-Dataset Attributes
+
+## Dataset Attributes
 Age : age of the patient [years]
 Sex : sex of the patient [M: Male, F: Female]
 ChestPainType : chest pain type [TA: Typical Angina, ATA: Atypical Angina, NAP: Non-Anginal Pain, ASY: Asymptomatic]
