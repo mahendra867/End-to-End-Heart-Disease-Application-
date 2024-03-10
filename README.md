@@ -8,9 +8,9 @@ To classify / predict whether a patient is prone to heart failure depending on m
 It is a binary classification with multiple numerical and categorical features.
 
 ## Dataset Attributes
-Age : age of the patient [years]
-Sex : sex of the patient [M: Male, F: Female]
-ChestPainType : chest pain type [TA: Typical Angina, ATA: Atypical Angina, NAP: Non-Anginal Pain, ASY: Asymptomatic]
+1 - Age : age of the patient [years]
+2 - Sex : sex of the patient [M: Male, F: Female]
+3 - ChestPainType : chest pain type [TA: Typical Angina, ATA: Atypical Angina, NAP: Non-Anginal Pain, ASY: Asymptomatic]
 RestingBP : resting blood pressure [mm Hg]
 Cholesterol : serum cholesterol [mm/dl]
 FastingBS : fasting blood sugar [1: if FastingBS > 120 mg/dl, 0: otherwise]
