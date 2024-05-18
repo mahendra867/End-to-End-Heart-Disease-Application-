@@ -72,7 +72,7 @@ In the model evaluation stage, I loaded the test data and the trained model. I e
 Clone the repository
 
 ```bash
-https://github.com/mahendra867/random_datasets/raw/main/Heart_csv.zip
+https://github.com/mahendra867/End-to-End-Heart-Disease-Application-.git
 ```
 ### STEP 01- Create a conda environment after opening the repository
 
