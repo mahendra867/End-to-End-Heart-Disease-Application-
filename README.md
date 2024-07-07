@@ -1,7 +1,9 @@
 # End-to-End-Heart-Disease-Application with MLOps
 
 ## Working of an Application
-link: https://www.linkedin.com/posts/mahendra-o_end-to-end-heart-disease-prediction-application-activity-7169593288964984832-RErT?utm_source=share&utm_medium=member_desktop
+
+https://github.com/mahendra867/End-to-End-Heart-Disease-Application-/assets/95703197/ef5a8ace-537e-46c6-981f-72c8ef5a8520
+
 
 A brief description of what this project does and who it's for
 
